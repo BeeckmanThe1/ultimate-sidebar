@@ -6,7 +6,7 @@ function App() {
         <div className="App">
             <FullScreenImg src={'https://picsum.photos/1200'}/>
             <Sidebar/>
-            <FullScreenImg src={'https://picsum.photos/1200'}/>
+            <FullScreenImg src={'https://picsum.photos/1199'}/>
         </div>
     );
 }
