@@ -1,0 +1,26 @@
+.ult-fullscreen-img-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.ult-fullscreen-img-wrapper .ult-text-wrapper {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    color: black;
+}
+
+.ult-fullscreen-img-wrapper  img {
+    filter: opacity(0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    left: 0;
+}

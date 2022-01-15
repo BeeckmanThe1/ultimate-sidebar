@@ -1,0 +1,19 @@
+.ult-sidebar .pro-sidebar-inner {
+    /*background: yellow;*/
+}
+
+.ult-sidebar {
+    /*TODO: might be temp.:*/
+    position: fixed;
+    top: 0;
+    height: fit-content;
+}
+
+.ult-sidebar.ult-right-sidebar {
+    left: 100%;
+    transform: translate(-100%);
+}
+
+.ult-sidebar.ult-left-sidebar {
+    left: 0;
+}
