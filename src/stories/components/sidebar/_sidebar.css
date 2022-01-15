@@ -6,6 +6,9 @@
     /*TODO: might be temp.:*/
     position: fixed;
     top: 0;
+}
+
+.ult-sidebar.ult-fit-content{
     height: fit-content;
 }
 

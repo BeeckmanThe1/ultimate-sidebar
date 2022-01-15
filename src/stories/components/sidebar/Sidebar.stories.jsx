@@ -10,10 +10,13 @@ const Template = (args) => <Sidebar {...args} />;
 
 export const Default = Template.bind();
 Default.args = {
-    displayLeft: 'true'
+    displayLeft: true,
+    fitContent: false,
+    collapsed: false
 };
 
 export const RightSidebar = Template.bind();
 RightSidebar.args = {
+    ...Default.args,
     displayLeft: false
 };

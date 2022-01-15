@@ -20,8 +20,10 @@ import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
 //collapsed, left or right?
 // background
 
-export const Sidebar = ({displayLeft}) => {
-    return <ProSidebar className={classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft})} rtl={!displayLeft} >
+export const Sidebar = ({displayLeft, fitContent, collapsed}) => {
+    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent});
+
+    return <ProSidebar collapsed={collapsed} className={className} rtl={!displayLeft}>
         <Menu iconShape="square">
             <MenuItem icon={<FontAwesomeIcon icon={faGem}/>}>Dashboard</MenuItem>
             <SubMenu title="Components" icon={<FontAwesomeIcon icon={faHeart}/>}>
@@ -33,8 +35,12 @@ export const Sidebar = ({displayLeft}) => {
 }
 
 Sidebar.propTypes = {
-    displayLeft: PropTypes.bool
+    displayLeft: PropTypes.bool,
+    fitContent: PropTypes.bool,
+    collapsed: PropTypes.bool
 };
 Sidebar.defaultProps = {
-    displayLeft: true
+    displayLeft: true,
+    fitContent: false,
+    collapsed: false
 };
