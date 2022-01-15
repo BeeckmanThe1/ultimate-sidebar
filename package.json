@@ -24,9 +24,6 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
-  "resolutions": {
-    "mini-css-extract-plugin": "2.4.5"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -64,6 +61,7 @@
     "@storybook/node-logger": "^6.4.12",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.12",
+    "mini-css-extract-plugin": "2.4.5",
     "webpack": "^5.66.0"
   }
 }
