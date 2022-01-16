@@ -1,15 +1,18 @@
 .ult-sidebar .pro-sidebar-inner {
-    background: rgba(0,0, 0, 0.8);
-}
-
-.ult-sidebar {
-    /*TODO: might be temp.:*/
-    position: fixed;
-    top: 0;
+    background: rgba(0,0, 0, 0.5);
 }
 
 .ult-sidebar.ult-fit-content{
     height: fit-content;
+}
+
+.ult-sidebar.ult-stretched-sidebar {
+    height: 100%;
+}
+
+.ult-sidebar.ult-fixed-sidebar{
+    position: fixed;
+    top: 0;
 }
 
 .ult-sidebar.ult-right-sidebar {

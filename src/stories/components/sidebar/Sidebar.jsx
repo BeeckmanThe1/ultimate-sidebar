@@ -16,14 +16,10 @@ import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
  * window mode.
  */
 
+export const Sidebar = ({displayLeft, fitContent, collapsed, isInline, sidebarWidth}) => {
+    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-inline-sidebar': isInline}, {'ult-fixed-sidebar': !isInline});
 
-//collapsed, left or right?
-// background
-
-export const Sidebar = ({displayLeft, fitContent, collapsed}) => {
-    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent});
-
-    return <ProSidebar collapsed={collapsed} className={className} rtl={!displayLeft}>
+    return <ProSidebar width={sidebarWidth} collapsed={collapsed} className={className} rtl={!displayLeft}>
         <Menu iconShape="square">
             <MenuItem icon={<FontAwesomeIcon icon={faGem}/>}>Dashboard</MenuItem>
             <SubMenu title="Components" icon={<FontAwesomeIcon icon={faHeart}/>}>
@@ -37,10 +33,12 @@ export const Sidebar = ({displayLeft, fitContent, collapsed}) => {
 Sidebar.propTypes = {
     displayLeft: PropTypes.bool,
     fitContent: PropTypes.bool,
-    collapsed: PropTypes.bool
+    collapsed: PropTypes.bool,
+    isInline: PropTypes.bool
 };
 Sidebar.defaultProps = {
     displayLeft: true,
     fitContent: false,
-    collapsed: false
+    collapsed: false,
+    isInline: false
 };
