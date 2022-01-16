@@ -1,11 +1,17 @@
 import React from 'react';
 
 import {FullScreenImg} from "../../components/fullScreenImg/FullScreenImg";
-import SidebarWrapper from "../../components/sidebar/SidebarWrapper";
+import SidebarWrapper, {SidebarTypes} from "../../components/sidebar/SidebarWrapper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'usecases/SideBarAtWork',
+    argTypes: {
+        type: {
+            options: SidebarTypes,
+            control: {type: 'select'}
+        }
+    }
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -19,10 +25,10 @@ const Template = (args) => <SidebarWrapper {...args}>
 
 export const Default = Template.bind();
 Default.args = {
+    type: SidebarTypes.drawer,
     displayLeft: true,
-    fitContent: false,
-    collapsed: false,
-    //isInline: false,
     sidebarWidth: 270,
     collapsedWidth: 80,
+    fitContent: false,
+    collapsed: false,
 };
