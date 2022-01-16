@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
+import {SidebarTypes} from "./SidebarWrapper";
 
 
 /**
@@ -16,10 +17,11 @@ import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
  * window mode.
  */
 
-export const Sidebar = ({displayLeft, fitContent, collapsed, isInline, sidebarWidth, collapsedWidth}) => {
-    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-inline-sidebar': isInline}, {'ult-fixed-sidebar': !isInline});
+export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth}) => {
+    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
 
-    return <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={className} rtl={!displayLeft}>
+    return <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={className}
+                       rtl={!displayLeft}>
         <Menu iconShape="square">
             <MenuItem icon={<FontAwesomeIcon icon={faGem}/>}>Dashboard</MenuItem>
             <SubMenu title="Components" icon={<FontAwesomeIcon icon={faHeart}/>}>
@@ -34,11 +36,9 @@ Sidebar.propTypes = {
     displayLeft: PropTypes.bool,
     fitContent: PropTypes.bool,
     collapsed: PropTypes.bool,
-    isInline: PropTypes.bool
 };
 Sidebar.defaultProps = {
     displayLeft: true,
     fitContent: false,
-    collapsed: false,
-    isInline: false
+    collapsed: false
 };

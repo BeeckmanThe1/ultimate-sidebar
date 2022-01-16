@@ -22,7 +22,7 @@ Default.args = {
     displayLeft: true,
     fitContent: false,
     collapsed: false,
-    isInline: false,
+    //isInline: false,
     sidebarWidth: 270,
     collapsedWidth: 80,
 };

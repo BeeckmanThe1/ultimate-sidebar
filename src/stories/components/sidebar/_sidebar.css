@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-.ult-sidebar.ult-fixed-sidebar{
+.ult-sidebar.ult-drawer{
     position: fixed;
     top: 0;
 }
