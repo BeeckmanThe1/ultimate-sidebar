@@ -7,20 +7,34 @@ const MainContentWrapper = ({children}) => {
     </aside>
 }
 
-const SidebarWrapper = ({children, isInline, sidebarWidth: newSidebarWidth, displayLeft, collapsed, ...rest}) => {
+const SidebarWrapper = ({
+                            children,
+                            isInline,
+                            sidebarWidth: newSidebarWidth,
+                            collapsedWidth: newCollapsedWidth,
+                            displayLeft,
+                            collapsed,
+                            ...rest
+                        }) => {
     const defaultCollapsedWidth = 80;
     const defaultSidebarWidth = 270;
 
     const [sidebarWidth, setSidebarWidth] = useState(defaultSidebarWidth);
+    const [collapsedWidth, setCollapsedWidth] = useState(defaultCollapsedWidth);
+
+    const [currentSidebarWidth, setCurrentSidebarWidth] = useState();
 
     useEffect(() => {
         setSidebarWidth(newSidebarWidth)
     }, [newSidebarWidth])
     useEffect(() => {
-        setSidebarWidth(collapsed ? defaultCollapsedWidth : newSidebarWidth)
-    }, [collapsed])
+        setCollapsedWidth(newCollapsedWidth)
+    }, [newCollapsedWidth])
+    useEffect(() => {
+        setCurrentSidebarWidth(collapsed ? collapsedWidth : sidebarWidth);
+    }, [collapsed, collapsedWidth, sidebarWidth]);
 
-    const gridTemplateColumns = [`${sidebarWidth}px`, 'auto'];
+    const gridTemplateColumns = [`${currentSidebarWidth}px`, 'auto'];
 
     const inlineStyleObj = {
         display: 'grid',
@@ -29,7 +43,13 @@ const SidebarWrapper = ({children, isInline, sidebarWidth: newSidebarWidth, disp
 
     return <div style={isInline ? inlineStyleObj : {}} className={'ult-sidebar-wrapper'}>
         {!displayLeft ? children : null}
-        <Sidebar {...{isInline, sidebarWidth, displayLeft, collapsed, ...rest}}/>
+        <Sidebar {...{
+            isInline,
+            sidebarWidth: collapsed ? collapsedWidth : sidebarWidth,
+            collapsedWidth: collapsedWidth,
+            displayLeft,
+            collapsed, ...rest
+        }}/>
         {displayLeft ? children : null}
     </div>
 };
