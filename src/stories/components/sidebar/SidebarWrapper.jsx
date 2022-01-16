@@ -17,12 +17,11 @@ const SidebarWrapper = ({children, isInline, sidebarWidth: newSidebarWidth, disp
         setSidebarWidth(newSidebarWidth)
     }, [newSidebarWidth])
     useEffect(() => {
-        if (collapsed) {
-            setSidebarWidth(defaultCollapsedWidth)
-        }
+        setSidebarWidth(collapsed ? defaultCollapsedWidth : newSidebarWidth)
     }, [collapsed])
 
     const gridTemplateColumns = [`${sidebarWidth}px`, 'auto'];
+
     const inlineStyleObj = {
         display: 'grid',
         gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
