@@ -38,20 +38,19 @@ const SidebarWrapper = ({
     const gridTemplateColumns = [`${currentSidebarWidth}px`, 'auto'];
 
     const sideMenuStyleObj = {
-        display: 'grid',
-        gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
+            display: 'grid',
+            gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
     }
-
-    console.log('type', type);
 
     return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
         {!displayLeft ? children : null}
         <Sidebar {...{
             type,
-            sidebarWidth: collapsed ? collapsedWidth : sidebarWidth,
-            collapsedWidth: collapsedWidth,
+            sidebarWidth,
+            collapsedWidth,
             displayLeft,
-            collapsed, ...rest
+            collapsed,
+            ...rest
         }}/>
         {displayLeft ? children : null}
     </div>

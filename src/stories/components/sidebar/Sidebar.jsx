@@ -17,18 +17,12 @@ import {SidebarTypes} from "./SidebarWrapper";
  * window mode.
  */
 
-export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth}) => {
+export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth, menu}) => {
     const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
 
     return <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={className}
                        rtl={!displayLeft}>
-        <Menu iconShape="square">
-            <MenuItem icon={<FontAwesomeIcon icon={faGem}/>}>Dashboard</MenuItem>
-            <SubMenu title="Components" icon={<FontAwesomeIcon icon={faHeart}/>}>
-                <MenuItem>Component 1</MenuItem>
-                <MenuItem>Component 2</MenuItem>
-            </SubMenu>
-        </Menu>
+        {menu}
     </ProSidebar>
 }
 
