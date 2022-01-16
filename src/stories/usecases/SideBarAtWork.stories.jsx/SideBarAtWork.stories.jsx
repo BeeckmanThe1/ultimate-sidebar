@@ -23,5 +23,6 @@ Default.args = {
     fitContent: false,
     collapsed: false,
     isInline: false,
-    sidebarWidth: 270
+    sidebarWidth: 270,
+    collapsedWidth: 80,
 };
