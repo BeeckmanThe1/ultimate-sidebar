@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import {ProSidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
 import {SidebarTypes} from "./SidebarWrapper";
+import {useDrag} from "@use-gesture/react";
 
 
 /**
@@ -17,19 +18,23 @@ import {SidebarTypes} from "./SidebarWrapper";
  * window mode.
  */
 
-export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth}) => {
-    const className = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
+export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth, menu, resizeSidebar}) => {
 
-    return <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={className}
-                       rtl={!displayLeft}>
-        <Menu iconShape="square">
-            <MenuItem icon={<FontAwesomeIcon icon={faGem}/>}>Dashboard</MenuItem>
-            <SubMenu title="Components" icon={<FontAwesomeIcon icon={faHeart}/>}>
-                <MenuItem>Component 1</MenuItem>
-                <MenuItem>Component 2</MenuItem>
-            </SubMenu>
-        </Menu>
-    </ProSidebar>
+    const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft});
+    const sidebarClass = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
+
+    const config = undefined;
+    const bind = useDrag(state => {
+        resizeSidebar(state?.movement?.[0]);
+    }, config);
+
+    return <aside className={asideClass}>
+        <div {...bind()} className={'col-resizer'}/>
+        <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={sidebarClass}
+                    rtl={!displayLeft}>
+            {menu}
+        </ProSidebar>
+    </aside>
 }
 
 Sidebar.propTypes = {

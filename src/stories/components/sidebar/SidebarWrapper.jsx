@@ -3,9 +3,9 @@ import {Sidebar} from "./Sidebar";
 import PropTypes from "prop-types";
 
 const MainContentWrapper = ({children}) => {
-    return <aside>
+    return <main>
         {children}
-    </aside>
+    </main>
 }
 
 const SidebarWrapper = ({
@@ -38,22 +38,32 @@ const SidebarWrapper = ({
     const gridTemplateColumns = [`${currentSidebarWidth}px`, 'auto'];
 
     const sideMenuStyleObj = {
-        display: 'grid',
-        gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
+            display: 'grid',
+            gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
     }
 
-    console.log('type', type);
+    const colResizer = <div>
+        lel
+    </div>
 
     return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
+
         {!displayLeft ? children : null}
+
         <Sidebar {...{
             type,
-            sidebarWidth: collapsed ? collapsedWidth : sidebarWidth,
-            collapsedWidth: collapsedWidth,
+            sidebarWidth,
+            collapsedWidth,
             displayLeft,
-            collapsed, ...rest
+            collapsed,
+            resizeSidebar: increment => setSidebarWidth(defaultSidebarWidth + increment),
+            ...rest
         }}/>
+
+
+
         {displayLeft ? children : null}
+
     </div>
 };
 
