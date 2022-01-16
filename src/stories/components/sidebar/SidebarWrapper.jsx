@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Sidebar} from "./Sidebar";
+import PropTypes from "prop-types";
 
 const MainContentWrapper = ({children}) => {
     return <aside>
@@ -9,7 +10,7 @@ const MainContentWrapper = ({children}) => {
 
 const SidebarWrapper = ({
                             children,
-                            isInline,
+                            type,
                             sidebarWidth: newSidebarWidth,
                             collapsedWidth: newCollapsedWidth,
                             displayLeft,
@@ -36,15 +37,17 @@ const SidebarWrapper = ({
 
     const gridTemplateColumns = [`${currentSidebarWidth}px`, 'auto'];
 
-    const inlineStyleObj = {
+    const sideMenuStyleObj = {
         display: 'grid',
         gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
     }
 
-    return <div style={isInline ? inlineStyleObj : {}} className={'ult-sidebar-wrapper'}>
+    console.log('type', type);
+
+    return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
         {!displayLeft ? children : null}
         <Sidebar {...{
-            isInline,
+            type,
             sidebarWidth: collapsed ? collapsedWidth : sidebarWidth,
             collapsedWidth: collapsedWidth,
             displayLeft,
@@ -54,11 +57,16 @@ const SidebarWrapper = ({
     </div>
 };
 
+export const SidebarTypes = {
+    'side-menu': 0,
+    'drawer': 1
+}
+
 SidebarWrapper.propTypes = {
-    isInline: false
+    type: PropTypes.oneOf(Object.values(SidebarTypes))
 };
 SidebarWrapper.defaultProps = {
-    isInline: false
+    type: SidebarTypes.drawer
 };
 
 SidebarWrapper.MainContentWrapper = MainContentWrapper;
