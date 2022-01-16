@@ -1,8 +1,25 @@
-.ult-sidebar .pro-sidebar-inner {
-    background: rgba(0,0, 0, 0.5);
+.ult-aside {
+    position: relative;
 }
 
-.ult-sidebar.ult-fit-content{
+.ult-aside .col-resizer {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    transform: translateX(-50%);
+    z-index: 1010;
+    cursor: col-resize;
+}
+
+.ult-aside.ult-left-aside .col-resizer {
+    left: 100%;
+}
+
+.ult-sidebar .pro-sidebar-inner {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.ult-sidebar.ult-fit-content {
     height: fit-content;
 }
 
@@ -10,7 +27,7 @@
     height: 100%;
 }
 
-.ult-sidebar.ult-drawer{
+.ult-sidebar.ult-drawer {
     position: fixed;
     top: 0;
 }
