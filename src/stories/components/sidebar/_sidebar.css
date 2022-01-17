@@ -40,3 +40,7 @@
 .ult-sidebar.ult-left-sidebar {
     left: 0;
 }
+
+.ult-sidebar.ult-no-transition{
+    transition: none;
+}
