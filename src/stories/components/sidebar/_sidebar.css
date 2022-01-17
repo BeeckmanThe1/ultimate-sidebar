@@ -1,5 +1,11 @@
-.ult-aside {
+.ult-aside.ult-drawer {
     position: relative;
+}
+
+.ult-aside.ult-side-menu {
+    height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
 .ult-aside .col-resizer {
@@ -9,6 +15,15 @@
     transform: translateX(-50%);
     z-index: 1010;
     cursor: col-resize;
+}
+
+.ult-aside.ult-drawer .ult-sidebar {
+    position: fixed;
+    top: 0;
+}
+
+.ult-aside.ult-right-aside .col-resizer {
+    left: 0;
 }
 
 .ult-aside.ult-left-aside .col-resizer {
@@ -27,11 +42,6 @@
     height: 100%;
 }
 
-.ult-sidebar.ult-drawer {
-    position: fixed;
-    top: 0;
-}
-
 .ult-sidebar.ult-right-sidebar {
     left: 100%;
     transform: translate(-100%);
@@ -41,6 +51,6 @@
     left: 0;
 }
 
-.ult-sidebar.ult-no-transition{
+.ult-sidebar.ult-no-transition {
     transition: none;
 }

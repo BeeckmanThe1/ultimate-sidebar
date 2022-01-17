@@ -38,8 +38,8 @@ const SidebarWrapper = ({
     const gridTemplateColumns = [`${currentSidebarWidth}px`, 'auto'];
 
     const sideMenuStyleObj = {
-            display: 'grid',
-            gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
+        display: 'grid',
+        gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
     }
 
     return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
@@ -55,8 +55,6 @@ const SidebarWrapper = ({
             setSidebarWidth,
             ...rest
         }}/>
-
-
 
         {displayLeft ? children : null}
 
