@@ -42,10 +42,6 @@ const SidebarWrapper = ({
             gridTemplateColumns: displayLeft ? gridTemplateColumns.join(' ') : gridTemplateColumns.reverse().join(' '),
     }
 
-    const colResizer = <div>
-        lel
-    </div>
-
     return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
 
         {!displayLeft ? children : null}
@@ -56,7 +52,7 @@ const SidebarWrapper = ({
             collapsedWidth,
             displayLeft,
             collapsed,
-            resizeSidebar: increment => setSidebarWidth(defaultSidebarWidth + increment * (displayLeft ? 1 : -1)),
+            setSidebarWidth,
             ...rest
         }}/>
 

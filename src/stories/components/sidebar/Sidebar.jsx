@@ -4,11 +4,8 @@ import {ProSidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import './_sidebar.css';
 import classnames from 'classnames';
-
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faGem, faHeart} from '@fortawesome/free-solid-svg-icons'
 import {SidebarTypes} from "./SidebarWrapper";
-import {useDrag} from "@use-gesture/react";
+import {useDrag, useGesture} from "@use-gesture/react";
 
 
 /**
@@ -18,15 +15,35 @@ import {useDrag} from "@use-gesture/react";
  * window mode.
  */
 
-export const Sidebar = ({displayLeft, fitContent, collapsed, type, sidebarWidth, collapsedWidth, menu, resizeSidebar}) => {
+export const Sidebar = ({
+                            displayLeft,
+                            fitContent,
+                            collapsed,
+                            type,
+                            sidebarWidth,
+                            collapsedWidth,
+                            menu,
+                            setSidebarWidth
+                        }) => {
+
+    const [isDragging, setIsDragging] = useState(false);
+    const [sidebarWidthBeforeDraggingStarted, setSidebarWidthBeforeDraggingStarted] = useState(sidebarWidth);
 
     const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft});
-    const sidebarClass = classnames('ult-sidebar', {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
-
-    const config = undefined;
-    const bind = useDrag(state => {
-        resizeSidebar(state?.movement?.[0]);
-    }, config);
+    const sidebarClass = classnames('ult-sidebar', {'ult-no-transition': isDragging}, {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
+    const bind = useGesture({
+        onDrag: ({movement: [mx]}) => {
+            setSidebarWidth(sidebarWidthBeforeDraggingStarted + mx * (displayLeft ? 1 : -1))
+        },
+        onDragStart: () => {
+            setIsDragging(true);
+            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+        },
+        onDragEnd: () => {
+            setIsDragging(false);
+            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+        }
+    })
 
     return <aside className={asideClass}>
         <div {...bind()} className={'col-resizer'}/>
