@@ -29,8 +29,8 @@ export const Sidebar = ({
     const [isDragging, setIsDragging] = useState(false);
     const [sidebarWidthBeforeDraggingStarted, setSidebarWidthBeforeDraggingStarted] = useState(sidebarWidth);
 
-    const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft});
-    const sidebarClass = classnames('ult-sidebar', {'ult-no-transition': isDragging}, {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
+    const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
+    const sidebarClass = classnames('ult-sidebar', {'ult-no-transition': isDragging}, {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent});
     const bind = useGesture({
         onDrag: ({movement: [mx]}) => {
             setSidebarWidth(sidebarWidthBeforeDraggingStarted + mx * (displayLeft ? 1 : -1))
@@ -46,10 +46,11 @@ export const Sidebar = ({
     })
 
     return <aside className={asideClass}>
-        <div {...bind()} className={'col-resizer'}/>
+
         <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={sidebarClass}
                     rtl={!displayLeft}>
             {menu}
+            <div {...bind()} className={'col-resizer'}/>
         </ProSidebar>
     </aside>
 }
