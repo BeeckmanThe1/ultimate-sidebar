@@ -23,19 +23,26 @@ export const Sidebar = ({
                             sidebarWidth,
                             collapsedWidth,
                             menu,
-                            resizeSidebar
+                            setSidebarWidth
                         }) => {
 
     const [isDragging, setIsDragging] = useState(false);
+    const [sidebarWidthBeforeDraggingStarted, setSidebarWidthBeforeDraggingStarted] = useState(sidebarWidth);
 
     const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft});
     const sidebarClass = classnames('ult-sidebar', {'ult-no-transition': isDragging}, {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
     const bind = useGesture({
         onDrag: ({movement: [mx]}) => {
-            resizeSidebar(mx);
+            setSidebarWidth(sidebarWidthBeforeDraggingStarted + mx * (displayLeft ? 1 : -1))
         },
-        onDragStart: () => setIsDragging(true),
-        onDragEnd: () => setIsDragging(false)
+        onDragStart: () => {
+            setIsDragging(true);
+            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+        },
+        onDragEnd: () => {
+            setIsDragging(false);
+            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+        }
     })
 
     return <aside className={asideClass}>

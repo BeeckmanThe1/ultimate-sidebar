@@ -52,7 +52,7 @@ const SidebarWrapper = ({
             collapsedWidth,
             displayLeft,
             collapsed,
-            resizeSidebar: increment => setSidebarWidth(defaultSidebarWidth + increment * (displayLeft ? 1 : -1)),
+            setSidebarWidth,
             ...rest
         }}/>
 
