@@ -15,42 +15,42 @@ import {useDrag, useGesture} from "@use-gesture/react";
  * window mode.
  */
 
-export const Sidebar = ({
-                            displayLeft,
-                            fitContent,
-                            collapsed,
-                            type,
-                            sidebarWidth,
-                            collapsedWidth,
-                            menu,
-                            setSidebarWidth
-                        }) => {
+export const Sidebar = (props) => {
+    const {
+        displayLeft,
+        fitContent,
+        collapsed,
+        type,
+        sidebarWidth,
+        collapsedWidth,
+        menu,
+        setSidebarWidth
+    } = props;
 
     const [isDragging, setIsDragging] = useState(false);
     const [sidebarWidthBeforeDraggingStarted, setSidebarWidthBeforeDraggingStarted] = useState(sidebarWidth);
 
     const asideClass = classnames('ult-aside', {'ult-left-aside': displayLeft}, {'ult-right-aside': !displayLeft}, {'ult-side-menu': type === SidebarTypes["side-menu"]}, {'ult-drawer': type === SidebarTypes.drawer});
     const sidebarClass = classnames('ult-sidebar', {'ult-no-transition': isDragging}, {'ult-left-sidebar': displayLeft}, {'ult-right-sidebar': !displayLeft}, {'ult-fit-content': fitContent}, {'ult-stretched-sidebar': !fitContent});
-    const bind = useGesture({
-        onDrag: ({movement: [mx]}) => {
-            setSidebarWidth(sidebarWidthBeforeDraggingStarted + mx * (displayLeft ? 1 : -1))
-        },
-        onDragStart: () => {
-            setIsDragging(true);
-            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
-        },
-        onDragEnd: () => {
-            setIsDragging(false);
-            setSidebarWidthBeforeDraggingStarted(sidebarWidth);
-        }
-    })
+
+    const onDrag = ({movement: [mx]}) => {
+        setSidebarWidth(sidebarWidthBeforeDraggingStarted + mx * (displayLeft ? 1 : -1))
+    };
+    const onDragStart = () => {
+        setIsDragging(true);
+        setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+    };
+    const onDragEnd = () => {
+        setIsDragging(false);
+        setSidebarWidthBeforeDraggingStarted(sidebarWidth);
+    };
+
+    const initGesture = useGesture({ onDrag, onDragStart, onDragEnd })
 
     return <aside className={asideClass}>
-
-        <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={sidebarClass}
-                    rtl={!displayLeft}>
+        <ProSidebar collapsedWidth={collapsedWidth} width={sidebarWidth} collapsed={collapsed} className={sidebarClass} rtl={!displayLeft}>
             {menu}
-            <div {...bind()} className={'col-resizer'}/>
+            <div {...initGesture()} className={'col-resizer'}/>
         </ProSidebar>
     </aside>
 }
