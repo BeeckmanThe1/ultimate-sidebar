@@ -39,6 +39,10 @@ const Template = (args) => {
     const websiteQuote1 = 'Inspiring quote.';
     const websiteQuote2 = 'My bae told me to stop impersonating a flamingo. I had to put my foot down.';
 
+    // Side bar menu is passed in a menu prop
+    // the website/main-content is passed as children.
+    // Maybe SidebarWrapper should be renamed to WebsiteLayout or Layout, since it contains the entire website
+
     return <SidebarWrapper {...{...args, type, menu }}>
         <SidebarWrapper.MainContentWrapper>
             <FullScreenImg src={'https://picsum.photos/1200'} value={websiteQuote1}/>
