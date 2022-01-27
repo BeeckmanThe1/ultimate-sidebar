@@ -8,15 +8,17 @@ const MainContentWrapper = ({children}) => {
     </main>
 }
 
-const SidebarWrapper = ({
-                            children,
-                            type,
-                            sidebarWidth: newSidebarWidth,
-                            collapsedWidth: newCollapsedWidth,
-                            displayLeft,
-                            collapsed,
-                            ...rest
-                        }) => {
+const SidebarWrapper = (props) => {
+    const {
+        children,
+        type,
+        sidebarWidth: newSidebarWidth,
+        collapsedWidth: newCollapsedWidth,
+        displayLeft,
+        collapsed,
+        ...rest
+    } = props;
+
     const defaultCollapsedWidth = 80;
     const defaultSidebarWidth = 270;
 
@@ -43,9 +45,7 @@ const SidebarWrapper = ({
     }
 
     return <div style={type === SidebarTypes["side-menu"] ? sideMenuStyleObj : {}} className={'ult-sidebar-wrapper'}>
-
         {!displayLeft ? children : null}
-
         <Sidebar {...{
             type,
             sidebarWidth,
@@ -55,9 +55,7 @@ const SidebarWrapper = ({
             setSidebarWidth,
             ...rest
         }}/>
-
         {displayLeft ? children : null}
-
     </div>
 };
 
