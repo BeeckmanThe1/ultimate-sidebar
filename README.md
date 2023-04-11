@@ -28,7 +28,7 @@
 
 ## Overview
 
-![screenshot](https://github.com/BeeckmanThe1/uploader/blob/main/src/static/readme/sidebar-screenshot.png)
+![screenshot](https://github.com/BeeckmanThe1/ultimate-sidebar/blob/master/src/static/readme/sidebar-screenshot.png)
 
 This project was a quick weekend POC, checking out the possabilities of a funky sidebar.
 
